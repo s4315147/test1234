@@ -1,0 +1,24 @@
+<!--rails g controller home index <br>-->
+<!--rails g model post <br>-->
+
+<div class="container">
+    
+    <h1>Update</h1>
+    <br>
+    
+    <form action="/updates/<%=@pps.id%>" method="POST">   
+    
+      <div class="form-group">
+        <label for="exampleInputEmail1">Update Title</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Title" name="tttt" value="<%=@pps.title%>"
+      
+  
+      <label for="exampleInputEmail1">Update Content</label>
+         <textarea class="form-control" rows="3" placeholder="Content" name="cccc"><%=@pps.content%></textarea> 
+         <!--Textarea 여서 value=''를 넣지 않는다 -->
+         <br>
+      <button type="submit" class="btn btn-default">Update</button>
+    </form>
+    <br>
+    
+</div>

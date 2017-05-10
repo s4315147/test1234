@@ -1,0 +1,79 @@
+<!--rails g controller home index <br>-->
+<!--rails g model post  (포스트라는 데이터 베이스 틀 을 만든다, 그리고  db/migrate/파일  에서 데이터 베이스를 만든다<br>-->
+
+ <% if user_signed_in? %>
+   <% current_user.email %>
+   
+   <a href="/users/sign_out">Sign Out</a>
+ 
+ <% else %>
+ 
+  <a href="/users/sign_in">Login</a>
+  <a href="/users/sign_up">Sign Up</a>
+ 
+ <% end %>
+ 
+
+
+<div class="container">
+    
+    <h3 style="letter-spacing: -1px;"><span style="width: 5px;  padding: 4px; margin-right: 4px;"></span>Welcome <small>User Name</small></h3>
+    <br>
+    
+    <form action="/write" method="POST">  
+    <!--/write 은 route에서 사용된다, 그리고 POST는 url에 입력한 데이터가 안보인다 , form을 쓸때는 POST를 쓰도록 -->
+ 
+    
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Title" name="tt" style="font-size: 40px; height: 60px; text-align: left;">
+      </div>
+  
+      <label for="exampleInputEmail1">Content</label>
+         <textarea class="form-control" rows="3" placeholder="Content" name="cc"></textarea>
+         <br>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    <br>
+    
+    <br>
+    
+
+        
+        
+    <% @pps.each do |p| %>
+    <div class="well">
+        
+       Title : <%=p.title%> 
+        <!-- index 에서 보일려면 = 을 넣어야한다 -->
+        
+       Content : <%=p.content %>
+        <a href="/delete/<%=p.id%>"><button type="submit" class="btn btn-default">Delete</button></a>
+        <a href="/update/<%=p.id%>"><button type="submit" class="btn btn-default">Update</button></a> 
+        <!--update.html.erb 를 만들어라 -->
+        <br>
+      
+        
+        <%p.comments.each do |c| %>
+        
+        ㄴ<%=c.comment %> <br>
+        
+        <% end %>
+        
+        <!--인덱스에서 코멘트 창을 만들어 주고, 그리고 모델을 만들고, table 을 만들서 db를 migrate 한다 -->
+        
+        <form action="/save/comment/<%=p.id%>" method="POST">
+         <label for="exampleInputEmail1">Comment</label>
+         <textarea class="form-control" rows="3" placeholder="Comment" name="putcomment"></textarea>
+         <br>
+      <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        </div>
+        
+    <% end %>
+    
+    
+ 
+    
+    
+    
